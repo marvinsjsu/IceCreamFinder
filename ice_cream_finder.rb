@@ -63,9 +63,13 @@ def find
       :radius => 3000
     }
   }
-  puts format_url(search_nearby_item)
-  # response = RestClient.get(format_url(search_nearby_item))
-  # item_locations = JSON.parse(response)
-  # puts item_locations
 
+  response = RestClient.get(format_url(search_nearby_item))
+  item_locations = JSON.parse(response)
+  item_locations["results"].each do |hash|
+    puts "#{hash["name"]}"
+    puts "#{hash["formatted_address"]}"
+    puts "============================"
+    puts " "
+  end
 end
